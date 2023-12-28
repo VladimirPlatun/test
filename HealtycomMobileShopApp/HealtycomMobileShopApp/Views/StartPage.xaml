@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HealtycomMobileShopApp.Views.StartPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="*,Auto" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="0,50,0,0">
+
+       <Grid RowDefinitions="*,Auto" WidthRequest="300" HeightRequest="450" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" RowSpacing="0">
+           <Frame Style="{StaticResource FrameShadow}" Margin="0" Padding="15"  >
+               <StackLayout Orientation="Vertical">
+                    <Image WidthRequest="109" HeightRequest="109" Source="Logo.png"/>
+                    <Label Text="{xct:Translate Continue}" TextColor="#6C808B" FontSize="14" />
+                    <Button x:Name="LoginButton" Command="{Binding GoToLoginCommand}" Text="{xct:Translate Login}" Style="{StaticResource BtnStyleHollow}"/>
+                    <Button x:Name="RegisterButton" Command="{Binding GoToRegisterCommand}" Text="{xct:Translate Register}" Style="{StaticResource BtnStyleFull}"/>
+               </StackLayout> 
+           </Frame>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="0">
+                <Label Text="{xct:Translate Language}" TextColor="#2e3a59" VerticalOptions="CenterAndExpand"/>
+                <Picker ItemsSource="{Binding SupportedLanguages}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedLanguage}" 
+                        SelectedIndexChanged="ChangeLanguageCommand"
+                        TextColor="#2e3a59" FontSize="15" WidthRequest="65" 
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"/>
+                <Image Source="dropdownbtn.png" HeightRequest="20" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>  
+       </Grid>
+       
+        <Label x:Name="LabelVersion" Grid.Row="1" TextColor="DimGray" FontSize="14" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,0,20"/>
+    </Grid>
+</ContentPage>

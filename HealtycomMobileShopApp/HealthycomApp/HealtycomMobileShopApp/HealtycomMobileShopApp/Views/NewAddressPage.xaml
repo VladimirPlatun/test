@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:HealtycomMobileShopApp.ViewModel;assembly=HealtycomMobileShopApp"
+             x:Class="HealtycomMobileShopApp.Views.NewAddressPage" NavigationPage.HasNavigationBar="False">
+    
+    <ContentPage.BindingContext>
+        <viewModel:NewAddressViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto, *" Margin="0,25,0,0">
+        <Grid ColumnDefinitions="Auto, *,  Auto" Padding="30, 20,30,5" ColumnSpacing="20">
+            <ImageButton Grid.Column="0" Source="back.png" BackgroundColor="Transparent" WidthRequest="18" HeightRequest="18" 
+                         VerticalOptions="Center" Command="{Binding GoBackCommand}"/>
+            <Label Grid.Column="1" Text="Adding an address" FontSize="20" FontAttributes="Bold" TextColor="Black"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Grid Grid.Column="2" WidthRequest="20" Padding="10, 0, 0, 0" HeightRequest="20">
+                <Image Source="Cart2.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="28" HeightRequest="28"/>
+                <Grid BackgroundColor="{DynamicResource ThemeColor}" WidthRequest="15" HeightRequest="15" HorizontalOptions="End" VerticalOptions="Start" Margin="0, -5, -5, 0">
+                    <Grid.Clip>
+                        <EllipseGeometry Center="7.5, 7.5" RadiusX="7.5" RadiusY="7.5"/>
+                    </Grid.Clip>
+                    <Label Text="{Binding ItemsInCart}" FontSize="10" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCartPageCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+        
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical">
+                <Frame Style="{StaticResource FrameShadow}" Margin="20" BackgroundColor="White" CornerRadius="16" HasShadow="True" VerticalOptions="Center">
+                    <StackLayout Grid.Row="1" Spacing="30" HorizontalOptions="Fill" VerticalOptions="StartAndExpand" Padding="0,0">
+                        <StackLayout Spacing="15">
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter the street for invoicing" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding invoice_addr_street}" Placeholder="Street" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter the invoice city" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding invoice_addr_city}" Placeholder="City" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter the postcode for invoicing" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding invoice_addr_postcode}" Placeholder="Postcode" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter the country code for invoicing" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding invoice_addr_country}" Placeholder="CZ/SK" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource FrameShadow}" Margin="20,0,20,20" BackgroundColor="White" CornerRadius="16" HasShadow="True" VerticalOptions="Center">
+                    <StackLayout Grid.Row="1" Spacing="30" HorizontalOptions="Fill" VerticalOptions="StartAndExpand" Padding="0,0">
+                        <StackLayout Spacing="15">
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a name for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_firstname}" Placeholder="Name" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a surname for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_lastname}" Placeholder="Surname" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a company for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_company}" Placeholder="Company" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a street for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_street}" Placeholder="Street" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a city for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_city}" Placeholder="City" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a postcode for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_postcode}" Placeholder="Postcode" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Spacing="5">
+                                <Label Text="Enter a country for delivery" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                                    <Entry Text="{Binding delivery_addr_country}" Placeholder="CZ/SK" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" />
+                                </Frame>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Button Text="Add address" Command="{Binding AddCommand}" Style="{StaticResource BtnStyleFull}" Margin="20,0,20,20"/>
+            </StackLayout>
+           
+        </ScrollView>
+      
+
+    </Grid>
+    
+</ContentPage>

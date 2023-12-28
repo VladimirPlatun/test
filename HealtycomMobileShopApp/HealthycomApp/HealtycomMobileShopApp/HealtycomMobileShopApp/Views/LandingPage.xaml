@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             xmlns:rating="clr-namespace:Rating;assembly=Rating"
+             x:Class="HealtycomMobileShopApp.Views.LandingPage">
+
+    <ContentPage.BindingContext>
+        <vm:LandingViewModel x:Name="Vm"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightGray" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="Auto, *" Margin="0,25,0,0">
+
+        <Grid ColumnDefinitions="Auto, *,  Auto" Padding="30, 20" ColumnSpacing="20">
+            <ImageButton Grid.Column="0" Source="menu.png" BackgroundColor="Transparent" WidthRequest="18" HeightRequest="18" 
+                         VerticalOptions="Center" Command="{Binding OpenLeftMenuCommand}"/>
+            <Label Grid.Column="1" Text="Catalog" FontSize="20" FontAttributes="Bold" TextColor="Black"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Grid Grid.Column="2" WidthRequest="20" Padding="10, 0, 0, 0" HeightRequest="20">
+                <Image Source="Cart2.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="28" HeightRequest="28"/>
+                <Grid BackgroundColor="{DynamicResource ThemeColor}" WidthRequest="15" HeightRequest="15" HorizontalOptions="End" VerticalOptions="Start" Margin="0, -5, -5, 0">
+                    <Grid.Clip>
+                        <EllipseGeometry Center="7.5, 7.5" RadiusX="7.5" RadiusY="7.5"/>
+                    </Grid.Clip>
+                    <Label Text="{Binding ItemsInCart}" FontSize="10" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCartPageCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" IsEnabled="{Binding IsNotBusy}" BackgroundColor="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{DynamicResource ThemeColor}" />
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never" Padding="0, 0, 0, 30">
+            <AbsoluteLayout>
+                <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="20" IsVisible="{Binding IsNotBusy}">
+                    <Grid HeightRequest="230">
+                        <Image Source="banner1.png" Aspect="Fill"/>
+                        <StackLayout WidthRequest="185" Margin="30" VerticalOptions="End" HorizontalOptions="Start">
+                            <Label Text="New Arrivals" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource ThemeColor}"/>
+                            <Label Text="Check out our fresh new stuff from Healtycom!" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource ThemeColor}"/>
+                            <Grid ColumnDefinitions="*, Auto" Margin="0, 15, 0, 0" Padding="10, 0" WidthRequest="130" BackgroundColor="{StaticResource ThemeColor}" HeightRequest="30" HorizontalOptions="Start">
+                                <Label x:Name="LabelShopNow" Text="SHOP NOW" FontSize="10" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Text=">" FontSize="10" TextColor="Black" VerticalOptions="Center"/>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+
+                    <StackLayout Grid.Row="1" VerticalOptions="Start" Margin="0, 0, 0, 0" >
+                    <Grid>
+                        <Label Text="Food supplements" Margin="30,0" FontSize="18" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="End" VerticalOptions="Center"  Margin="30,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CategoryCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="View all" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                            <Label Text=">" FontSize="16" TextColor="{DynamicResource ThemeColor}" VerticalOptions="Center"/>
+                        </StackLayout>
+                        
+                    </Grid>
+                        <Frame Style="{StaticResource FrameShadow}" Margin="10" Padding="15" >
+                            <CollectionView x:Name="CollectionViewCategories" SelectionMode="Single" ItemsSource="{Binding Categories}" 
+                                        HeightRequest="345" SelectedItem="{Binding SelectedCategory}"
+                                        SelectionChangedCommand="{Binding SelectCategoryCommand}" >
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.EmptyView>
+                                <Label Text="No Category found." TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </CollectionView.EmptyView>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Margin="0" Padding="0" Spacing="0">
+                                        <Grid ColumnDefinitions="*, Auto" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="End" >
+                                                <Label Text="{Binding Name}"   FontSize="15" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center"/>
+                                            <Label Grid.Column="1" Text=">" FontSize="16" TextColor="#6C808B" FontAttributes="Bold" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+                    </Frame>
+                   
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" VerticalOptions="Start" Margin="30, 0, 0, 0">
+                    <Grid>
+                        <Label Text="Hot Deals" FontSize="18" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
+                        <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="End" VerticalOptions="Center" Margin="30,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ProductsCommand}" CommandParameter="Hot Deals"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="View All" FontSize="14" TextColor="Black" VerticalOptions="Center"/>
+                            <Label Text=">" FontSize="14" TextColor="{DynamicResource ThemeColor}" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+
+                        <CollectionView x:Name="CollectionViewProducts" SelectionMode="Single" HeightRequest="170" ItemsSource="{Binding Products}" 
+                                        SelectedItem="{Binding SelectedProduct}" 
+                                        SelectionChangedCommand="{Binding SelectProductCommand}" >
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.EmptyView>
+                            <Label Text="No items found." TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout VerticalOptions="Start" Spacing="0" WidthRequest="90" HeightRequest="170">
+                                        <Image Aspect="AspectFill" Source="{Binding ImagePath}" WidthRequest="70" HeightRequest="112" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+                                        <StackLayout Padding="0" Margin="2,0,0,0" Spacing="0" VerticalOptions="Start" Orientation="Vertical" >
+                                            <Label Text="{Binding ProductName}" FontSize="14" TextColor="Black" LineBreakMode="TailTruncation"/>
+                                            <rating:RatingBar x:Name="rating" HorizontalOptions="Center" ImageWidth="12" ImageHeight="12" FlowDirection="LeftToRight" EmptyStarImage="Star.png" FillStarImage="StarFull.png" SelectedStarValue="5" />
+                                            <Label Text="{Binding Price, StringFormat='€{0:N2}'}" FontSize="13" TextColor="Black" FontAttributes="Bold" />
+                                        </StackLayout>
+                                    </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+            </AbsoluteLayout>
+        </ScrollView>
+               
+    </Grid>
+    
+</ContentPage>

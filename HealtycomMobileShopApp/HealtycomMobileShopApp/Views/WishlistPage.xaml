@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:HealtycomMobileShopApp.ViewModel;assembly=HealtycomMobileShopApp"
+             xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HealtycomMobileShopApp.Views.WishlistPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModel:WishlistViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *" Margin="0,25,0,0">
+        <Grid ColumnDefinitions="Auto, *,  Auto" Padding="30, 20,30,0" ColumnSpacing="20">
+            <ImageButton Grid.Column="0" Source="menu.png" BackgroundColor="Transparent" WidthRequest="18" HeightRequest="18" 
+                         VerticalOptions="Center" Command="{Binding OpenLeftMenuCommand}"/>
+            <Label Grid.Column="1" Text="{extensions:Translate Wishlist}" FontSize="20" FontAttributes="Bold" TextColor="Black"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Grid Grid.Column="2" Padding="10, 0, 0, 0">
+                <Image Source="Cart2.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="42" HeightRequest="42"/>
+                <Grid BackgroundColor="{DynamicResource ThemeColor}" WidthRequest="24" HeightRequest="24" HorizontalOptions="End" VerticalOptions="Start" Margin="0, -5, -5, 0">
+                    <Grid.Clip>
+                        <EllipseGeometry Center="12, 12" RadiusX="7.5" RadiusY="7.5"/>
+                    </Grid.Clip>
+                    <Label Text="{Binding ItemsInCart}" FontSize="12" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCartPageCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+
+        <CollectionView x:Name="WishlistColView" Grid.Row="1" Margin="20,10" 
+                        VerticalScrollBarVisibility="Never" SelectionMode="None" 
+                        ItemsSource="{Binding Wishlist}" 
+                        BackgroundColor="Transparent" 
+                        IsVisible="{Binding IsNotBusy}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <StackLayout >
+                    <Label Text="{extensions:Translate WishlistEmpty}" TextColor="#D9D9D9" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+                
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource FrameShadow}" HasShadow="False" x:Name="MainView" WidthRequest="345"  Padding="0,0" >
+                        <SwipeView BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItemView Command="{Binding Source={x:Reference WishlistColView}, Path=BindingContext.DeleteCommand}"
+                                                   CommandParameter="{Binding Source={x:Reference MainView}, Path=BindingContext}">
+                                        <Grid BackgroundColor="#E6E6E6" WidthRequest="80" HorizontalOptions="Fill" VerticalOptions="Fill" >
+                                            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                                                <Image Source="delete.png" HeightRequest="24" HorizontalOptions="Center" />
+                                                <Label Text="{extensions:Translate Remove}" TextColor="Black" FontSize="10" HorizontalOptions="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <StackLayout Orientation="Vertical" >
+                                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="0" Margin="0,10,10,0">
+                                    <Image Grid.Column="0"  Aspect="AspectFit" Source="{Binding Product.ImagePath}" WidthRequest="109"  HeightRequest="109" HorizontalOptions="Start" />
+                                    <StackLayout Grid.Column="1" Spacing="10">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Product.ProductName}" FontSize="16" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="WordWrap"/>
+                                            <Image Source="heartRed.png"  WidthRequest="20" HeightRequest="18" HorizontalOptions="End"/>
+                                         </StackLayout>
+                                       
+                                        <StackLayout Orientation="Vertical">
+                                            <Label  Text="{extensions:Translate NofCap}" FontSize="12" Opacity="0.6" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start" LineBreakMode="WordWrap"/>
+                                            <Label Text="{Binding Product.ProductsNumberCapsules}" FontSize="14" TextColor="Black" VerticalOptions="Start" HorizontalOptions="StartAndExpand" LineBreakMode="WordWrap"/>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="{extensions:Translate Dosage}" FontSize="12" Opacity="0.6" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start" LineBreakMode="WordWrap"/>
+                                            <Label Text="{Binding Product.ProductsDosage}" FontSize="14" TextColor="Black" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" LineBreakMode="WordWrap"/>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="{extensions:Translate TotalWeight}" FontSize="12" Opacity="0.6" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="WordWrap"/>
+                                            <Label Text="{Binding Product.ProductsWeight}" FontSize="14" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand" LineBreakMode="WordWrap"/>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{extensions:Translate Price}" FontSize="12" Opacity="0.6" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="WordWrap"/>
+                                            <Label Text="{Binding Product.Price, StringFormat='€{0:N2}'}" FontAttributes="Bold" FontSize="16" TextColor="Black" VerticalOptions="Center" HorizontalOptions="End" LineBreakMode="WordWrap"/>
+                                        </StackLayout>
+                                        
+                                    </StackLayout>
+                                </Grid>
+
+                                <Button Text="{extensions:Translate AddToCart}" Style="{StaticResource BtnStyleFull}"  Command="{Binding Source={x:Reference WishlistColView}, Path=BindingContext.AddToCartCommand}"
+                                        CommandParameter="{Binding Source={x:Reference MainView}, Path=BindingContext}" Margin="70,0,70,5"/>
+
+                            </StackLayout>
+                        </SwipeView>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>        
+
+    </Grid>
+
+
+</ContentPage>

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             xmlns:rating="clr-namespace:Rating;assembly=Rating"
+             x:Class="HealtycomMobileShopApp.Views.ProductPage" NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <vm:ProductViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightGray " />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *" Padding="0"  HorizontalOptions="Center" VerticalOptions="Start" Margin="0,25,0,0">
+        <Grid ColumnDefinitions="Auto, *,  Auto" Padding="30, 20" ColumnSpacing="20">
+            <ImageButton Grid.Column="0" Source="back.png" BackgroundColor="Transparent" WidthRequest="18" HeightRequest="18" 
+                         VerticalOptions="Center" Command="{Binding GoBackCommand}"/>
+            <Label Grid.Column="1" Text="{Binding Title}" FontSize="20" FontAttributes="Bold" TextColor="Black"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Grid Grid.Column="2" WidthRequest="20" Padding="10, 0, 0, 0" HeightRequest="20">
+                <Image Source="Cart2.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="28" HeightRequest="28"/>
+                <Grid BackgroundColor="{DynamicResource ThemeColor}" WidthRequest="15" HeightRequest="15" HorizontalOptions="End" VerticalOptions="Start" Margin="0, -5, -5, 0">
+                    <Grid.Clip>
+                        <EllipseGeometry Center="7.5, 7.5" RadiusX="7.5" RadiusY="7.5"/>
+                    </Grid.Clip>
+                    <Label Text="{Binding ItemsInCart}" FontSize="10" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCartPageCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+
+        <CollectionView x:Name="CollectionViewProduct" Grid.Row="1" Margin="20, 10" HorizontalOptions="Center" VerticalOptions="Start"
+                        SelectionMode="Single" 
+                        ItemsSource="{Binding Products}" VerticalScrollBarVisibility="Never"
+                        SelectedItem="{Binding SelectedProduct}" 
+                        SelectionChangedCommand="{Binding SelectProductCommand}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="10" HorizontalItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <Label Text="No product found." TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout VerticalOptions="Start" Spacing="0" Padding="0" Margin="0" >
+                        <Image Aspect="Fill" Source="{Binding ImagePath}" WidthRequest="100" HeightRequest="160" HorizontalOptions="Center"  VerticalOptions="Start"/>
+                        <StackLayout Spacing="0" Padding="0" Margin="0">
+
+                            <StackLayout Spacing="0" Padding="0" Margin="0">
+                                <Label Text="{Binding ProductName}" FontSize="16" TextColor="Black" LineBreakMode="WordWrap"/>
+                                <rating:RatingBar x:Name="rating" HorizontalOptions="Start" ImageWidth="16" ImageHeight="16" FlowDirection="LeftToRight" EmptyStarImage="Star.png" FillStarImage="StarFull.png" SelectedStarValue="5" />
+                            </StackLayout>
+
+                            <Label Text="{Binding Price, StringFormat='€{0:N2}'}" FontSize="16" TextColor="Black" FontAttributes="Bold"/>
+                            <Grid>
+                                <Frame  HeightRequest="25" WidthRequest="150" Padding="5" BackgroundColor="#75AFF5" VerticalOptions="Start" HorizontalOptions="Center" CornerRadius="16" Margin="0,5,0,0">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnCartFrameTapped"  CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Label x:Name="cartLabel" Text="Add to Cart" TextColor="White" FontSize="16" />
+                                        <Image Source="cartWhite.png" HeightRequest="28" WidthRequest="28" Margin="5,0,0,0"/>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Footer>
+                <Grid/>
+            </CollectionView.Footer>
+            
+        </CollectionView>
+        
+    </Grid>
+    
+</ContentPage>

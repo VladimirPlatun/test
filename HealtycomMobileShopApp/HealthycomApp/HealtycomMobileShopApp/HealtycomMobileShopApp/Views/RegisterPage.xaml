@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             x:Class="HealtycomMobileShopApp.Views.RegisterPage"
+             NavigationPage.HasNavigationBar="False" >
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Padding="0" Margin="0,25,0,0">
+        <ScrollView HorizontalOptions="CenterAndExpand" VerticalScrollBarVisibility="Never" Padding="0" Margin="0">
+            <StackLayout WidthRequest="345" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Padding="10" Margin="0" Spacing="10">
+                <!--Applicant's details-->
+                <Frame Style="{StaticResource FrameShadow}" Margin="0" Padding="15" BackgroundColor="White" WidthRequest="300" CornerRadius="16" HasShadow="True" VerticalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Applicant's details" FontAttributes="Bold" Margin="0" TextColor="#000000" FontSize="17" FontFamily="Basis Grotesque Pro"></Label>
+                        
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Legal status" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}">
+                            <Grid ColumnDefinitions="*, Auto" >
+                                <Picker Grid.Column="0" ItemDisplayBinding="{Binding Value}" ItemsSource="{Binding ListLegalStatusToList}" SelectedItem="{Binding LegalStatusAp}" x:Name="pickerLegalStatusAP" TextColor="#000000" Title="Legal status" TitleColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                                <Image Grid.Column="1" WidthRequest="24" HeightRequest="24" Source="dropdownbtn.png" VerticalOptions="Center" HorizontalOptions="End" />
+                            </Grid>
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Gender" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}">
+                            <Grid ColumnDefinitions="*, Auto" >
+                                <Picker Grid.Column="0" ItemDisplayBinding="{Binding Value}" ItemsSource="{Binding ListGenderToList}" SelectedItem="{Binding GenderAp}"  x:Name="pickerGenderAP" TextColor="#000000" Title="Gender" TitleColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                                <Image Grid.Column="1" WidthRequest="24" HeightRequest="24" Source="dropdownbtn.png" VerticalOptions="Center" HorizontalOptions="End" />
+                            </Grid>
+                            <!--<Entry Text="{Binding Gender}" Placeholder="Man" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>-->
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Name" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}">
+                            <Entry Text="{Binding Name}" TextColor="Black" Placeholder="Name" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Surname" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}" >
+                            <Entry Text="{Binding Surname}" TextColor="Black" Placeholder="Surname" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Mobile phone" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}" >
+                            <Entry Text="{Binding MobilePhone}" TextColor="Black" Placeholder="Mobile phone" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Email" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}" >
+                            <Entry Text="{Binding Email}" TextColor="Black" Placeholder="Email" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <!--Login-->
+                <Frame Style="{StaticResource FrameShadow}" Margin="0" Padding="15" BackgroundColor="White" WidthRequest="300" CornerRadius="16" HasShadow="True" VerticalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Login" FontAttributes="Bold" Margin="0" TextColor="#000000" FontSize="17" FontFamily="Basis Grotesque Pro"></Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Password" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}" >
+                            <Entry Text="{Binding Password}" TextColor="Black" IsPassword="True" Placeholder="Password" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Confirm password" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                    <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Frame Style="{StaticResource EntryFrame}" >
+                            <Entry Text="{Binding ConfirmPassword}" TextColor="Black" IsPassword="True" Placeholder="Confirm password" PlaceholderColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        </Frame>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                                <CheckBox x:Name="checkBoxTerms" CheckedChanged="checkBoxTPD_CheckedChanged"/>
+                                <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="I agree to" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                            <Span Text=" the terms and conditions" TextColor="#75AFF5" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                            <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                <CheckBox x:Name="checkBoxPersonalData" CheckedChanged="checkBoxTPD_CheckedChanged"/>
+                                <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="I agree to" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                            <Span Text=" the processing of personal data" TextColor="#75AFF5" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                            <Span Text=" * " TextColor="Red" FontSize="16" FontAttributes="Bold"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                                <CheckBox x:Name="checkBoxReceiveNewsletters"/>
+                                <Label HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="I agree to receive newsletters" TextColor="#000000" FontSize="16" FontFamily="Basis Grotesque Pro"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </Grid>
+                        
+                    </StackLayout>
+                </Frame>
+                
+                <!-- Register Button-->
+                <Button x:Name="RegisterButton" Command="{Binding RegisterCommand}"  Text="Sign up" Style="{StaticResource BtnStyleFull}"/>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

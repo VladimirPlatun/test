@@ -1,0 +1,172 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp.Android/HealtycomMobileShopApp.Android.csproj": {}
+  },
+  "projects": {
+    "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp.Android/HealtycomMobileShopApp.Android.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp.Android/HealtycomMobileShopApp.Android.csproj",
+        "projectName": "HealtycomMobileShopApp.Android",
+        "projectPath": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp.Android/HealtycomMobileShopApp.Android.csproj",
+        "packagesPath": "/Users/Vladimir/.nuget/packages/",
+        "outputPath": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp.Android/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/Users/Vladimir/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "monoandroid13.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "monoandroid13.0": {
+            "projectReferences": {
+              "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp/HealtycomMobileShopApp.csproj": {
+                "projectPath": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp/HealtycomMobileShopApp.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "monoandroid13.0": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Xamarin.CommunityToolkit": {
+              "target": "Package",
+              "version": "[2.0.5, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.7.5, )"
+            },
+            "Xamarin.FFImageLoading.Svg": {
+              "target": "Package",
+              "version": "[2.4.11.982, )"
+            },
+            "Xamarin.FFImageLoading.Svg.Forms": {
+              "target": "Package",
+              "version": "[2.4.11.982, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2578, )"
+            },
+            "Xamarin.Rating": {
+              "target": "Package",
+              "version": "[1.0.0.2, )"
+            }
+          }
+        }
+      }
+    },
+    "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp/HealtycomMobileShopApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp/HealtycomMobileShopApp.csproj",
+        "projectName": "HealtycomMobileShopApp",
+        "projectPath": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp/HealtycomMobileShopApp.csproj",
+        "packagesPath": "/Users/Vladimir/.nuget/packages/",
+        "outputPath": "/Users/Vladimir/Desktop/HealthycomApp-master/HealtycomMobileShopApp/HealthycomApp/HealtycomMobileShopApp/HealtycomMobileShopApp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/Vladimir/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.Extensions.ApiDescription.Client": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Runtime.Serialization.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.10.2, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.10.2, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.10.2, )"
+            },
+            "Xamarin.CommunityToolkit": {
+              "target": "Package",
+              "version": "[2.0.5, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2578, )"
+            },
+            "Xamarin.Rating": {
+              "target": "Package",
+              "version": "[1.0.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.426/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

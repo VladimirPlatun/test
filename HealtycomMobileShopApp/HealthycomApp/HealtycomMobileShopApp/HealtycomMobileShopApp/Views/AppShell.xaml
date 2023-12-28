@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:HealtycomMobileShopApp.Views"
+             xmlns:viewModel="clr-namespace:HealtycomMobileShopApp.ViewModel;assembly=HealtycomMobileShopApp"
+             Shell.FlyoutHeaderTemplate="{StaticResource FlyoutHeaderTemplate}"
+             Shell.MenuItemTemplate="{StaticResource MenuTemplate}" 
+             Shell.NavBarIsVisible="False"           
+             x:Class="HealtycomMobileShopApp.Views.AppShell">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource ThemeColor}"/>
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource BgColor}"/>
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="Shell.TitleColor" Value="{StaticResource ThemeColor}"/>
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BgColor}"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource ThemeColor}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource ThemeColor}"/>
+            </Style>
+
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
+            <DataTemplate x:Key="FlyoutHeaderTemplate">
+                <ContentView BackgroundColor="{StaticResource ThemeColor}" HeightRequest="150">
+                    <Image Source="Logo.png" WidthRequest="95" HeightRequest="95" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </ContentView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MenuTemplate">
+                <StackLayout Orientation="Horizontal">
+                    <Image Margin="30, 10, 20, 10" Source="{Binding Icon}" WidthRequest="16" HeightRequest="16" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Label Text="{Binding Title}" TextColor="{StaticResource GrayColor}" FontSize="16" VerticalOptions="Center"/>
+                </StackLayout>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <FlyoutItem Title="Menu" Icon="leftArrow.png" FlyoutDisplayOptions="AsMultipleItems" >
+        <Tab Title="Catalog" Icon="Catalog.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:LandingPage}"/>
+        </Tab>
+
+        <Tab Title="Cart" Icon="Cart.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:CartPage}" Route="CartPage"/>
+        </Tab>
+
+        <Tab Title="Wishlist" Icon="heart.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:WishlistPage}" />
+        </Tab>
+
+        <Tab Title="Account" Icon="AccountTab.png" >
+            <ShellContent ContentTemplate="{DataTemplate views:AccountPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+ 
+    
+</Shell>

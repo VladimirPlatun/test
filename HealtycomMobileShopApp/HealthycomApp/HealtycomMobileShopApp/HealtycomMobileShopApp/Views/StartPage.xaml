@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             x:Class="HealtycomMobileShopApp.Views.StartPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <Label Text="Authorization" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="17" FontFamily="Basis Grotesque Pro" TextColor="#FFFFFF"/>
+    </NavigationPage.TitleView>
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="0,25,0,0">
+
+        <ScrollView HorizontalOptions="CenterAndExpand" VerticalScrollBarVisibility="Never">
+            <Grid RowDefinitions="2*, *" WidthRequest="300" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Frame Style="{StaticResource FrameShadow}" Margin="10" Padding="15"  >
+                    <StackLayout Orientation="Vertical" Margin="0,0,0,10">
+                        <Image WidthRequest="109" HeightRequest="109" Source="Logo.png"/>
+                        <Label Text="To continue, login or register an account" TextColor="#6C808B" FontSize="14" FontFamily="Basis Grotesque Pro"/>
+                        <Button x:Name="LoginButton" Command="{Binding GoToLoginCommand}" Text="Login" Style="{StaticResource BtnStyleHollow}"/>
+                        <Button x:Name="RegisterButton" Command="{Binding GoToRegisterCommand}" Text="Register" Style="{StaticResource BtnStyleFull}"/>
+                    </StackLayout> 
+                </Frame>
+                
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

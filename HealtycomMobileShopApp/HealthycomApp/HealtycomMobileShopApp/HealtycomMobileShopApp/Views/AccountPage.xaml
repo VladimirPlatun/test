@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:HealtycomMobileShopApp.ViewModel;assembly=HealtycomMobileShopApp"
+             x:Class="HealtycomMobileShopApp.Views.AccountPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModel:AccountViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto, Auto" Margin="15,25,15,0" >
+            
+                <StackLayout Grid.Row="0" Spacing="10">
+                <Frame  Style="{StaticResource FrameShadow}" HasShadow="True" >
+                    <StackLayout Orientation="Vertical" Spacing="10">
+
+                        <StackLayout Orientation="Horizontal" Spacing="16">
+                            <Image Source="{Binding CurrentUser.image}" HeightRequest="85" WidthRequest="85" HorizontalOptions="Start" />
+                            <Label TextColor="Black" FontSize="19" VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding CurrentUser.firstname}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding CurrentUser.lastname}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="0,0" Spacing="16">
+                            <Label Text="Telephone" FontSize="14" TextColor="#B0B0B0"/>
+                            <Label Text="{Binding CurrentUser.phone}" TextColor="Black" FontSize="14" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="0,0" Spacing="16">
+                            <Label Text="Email" FontSize="14" TextColor="#B0B0B0"/>
+                            <Label Text="{Binding CurrentUser.email}" TextColor="Black" FontSize="14" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="0,0" Spacing="16">
+                            <Label Text="{Binding CurrentUser.company}" TextColor="Black" FontSize="14" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource FrameShadow}"  HasShadow="True">
+                    <StackLayout VerticalOptions="Start">
+                        <Grid>
+                            <Label Text="SHIPPING ADDRESS" Margin="0,0" FontSize="14" Opacity="0.6" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="End" VerticalOptions="Center">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NewAddressCommand}"/>
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="Add New" FontSize="14" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Text=">" FontSize="16" TextColor="{DynamicResource ThemeColor}" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                        <CollectionView SelectionMode="Single" ItemsSource="{Binding Addresses}" HeightRequest="125" SelectedItem="{Binding SelectedAddress}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.EmptyView>
+                                <Label Text="Addresses not found" FontSize="14" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </CollectionView.EmptyView>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*, Auto" WidthRequest="300" HeightRequest="125" BackgroundColor="White" Padding="30">
+                                        <Grid.Resources>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="VisualStateManager.VisualStateGroups">
+                                                    <VisualStateGroupList>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal"/>
+                                                            <VisualState x:Name="Selected">
+                                                                <VisualState.Setters>
+                                                                    <Setter TargetName="CheckView" Property="Image.IsVisible" Value="True"></Setter>
+                                                                </VisualState.Setters>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateGroupList>
+                                                </Setter>
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Label VerticalOptions="Center" TextColor="Black">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}, {2}&#x0a;{3}&#x0a;{4} {5}&#x0a;{6}">
+                                                    <Binding Path="delivery_addr_firstname"/>
+                                                    <Binding Path="delivery_addr_lastname"/>
+                                                    <Binding Path="delivery_addr_company"/>
+                                                    <Binding Path="delivery_addr_street"/>
+                                                    <Binding Path="delivery_addr_city"/>
+                                                    <Binding Path="delivery_addr_postcode"/>
+                                                    <Binding Path="delivery_addr_countries_name"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                        <Image Grid.Column="1" x:Name="CheckView" Source="check.png" HeightRequest="20" WidthRequest="20" IsVisible="False" VerticalOptions="Start" Margin="0,0,30,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+           
+        <Button Grid.Row="1" Style="{StaticResource BtnStyleHollow}" Margin="0,20" Command="{Binding LogoutCommand}" Text="Logout"  TextColor="{DynamicResource ThemeColor}"/>
+
+
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
