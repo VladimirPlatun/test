@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HealtycomMobileShopApp.Views.LoginPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="{extensions:Translate Login}">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+        <ScrollView HorizontalOptions="CenterAndExpand" VerticalScrollBarVisibility="Never" IsVisible="{Binding IsNotBusy}">
+            <Grid RowDefinitions="2*, *" WidthRequest="300" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                
+                <Frame Style="{StaticResource FrameShadow}" Margin="10" Padding="15">
+                    <StackLayout Orientation="Vertical">
+
+                        <Label Text="{extensions:Translate EYM}" TextColor="#000000" FontSize="16" />
+                          <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                            <Entry Placeholder="{extensions:Translate EYM}" Text="{Binding EmailLoginPage}" TextColor="Black" PlaceholderColor="#6C808B" FontSize="14" Margin="-10,0"/>
+                          </Frame>
+
+                        <Label Text="{extensions:Translate ETP}" TextColor="#000000" FontSize="16" ></Label>
+                          <Frame Style="{StaticResource EntryFrame}" Padding="10, 0, 10, 0" HeightRequest="40">
+                            <Entry Placeholder="{extensions:Translate ETP}" Text="{Binding PasswordLoginPage}" TextColor="Black" IsPassword="True" PlaceholderColor="#6C808B" FontSize="14" Margin="-10,0"/>
+                          </Frame>
+                          
+                          <Label HorizontalOptions="StartAndExpand" Margin="0, 15, 0, 0" TextColor="{DynamicResource ThemeColor}">
+                              <Label.FormattedText>
+                                  <FormattedString>
+                                    <Span Text="{extensions:Translate FY}" TextColor="Black" FontSize="14"></Span>
+                                    <Span Text="{extensions:Translate SpaceP}" TextColor="{DynamicResource ThemeColor}" FontSize="14"/>
+                                    <Span Text=" ?" TextColor="Black" FontSize="14"/>
+                                  </FormattedString>
+                              </Label.FormattedText>
+                          </Label>
+
+                        <Button x:Name="LoginButton" Command="{Binding LoginCommand}" Text="{extensions:Translate SignUp}" Style="{StaticResource BtnStyleFull}"/>
+                          <Label HorizontalOptions="StartAndExpand"  Margin="0, 5, 0, 0" TextColor="{DynamicResource ThemeColor}">
+                              <Label.FormattedText>
+                                  <FormattedString>
+                                    <Span Text="{extensions:Translate NoA}" TextColor="Black" FontSize="14"/>
+                                    <Span Text="{extensions:Translate SpaceR}" TextColor="{DynamicResource ThemeColor}" FontSize="14">
+                                            <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding GoToRegisterCommand}"/>
+                                            </Span.GestureRecognizers>
+                                      </Span>
+                                  </FormattedString>
+                              </Label.FormattedText>
+                          </Label>
+                    </StackLayout>
+                </Frame>
+
+            </Grid>
+          
+        </ScrollView>
+    </Grid>
+    
+</ContentPage>

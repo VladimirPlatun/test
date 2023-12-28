@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rating="clr-namespace:Rating;assembly=Rating"
+             xmlns:viewModel="clr-namespace:HealtycomMobileShopApp.ViewModel"
+             xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HealtycomMobileShopApp.Views.ProductDetailsPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModel:ProductDetailsViewModel x:Name="Vm"/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto, *" Margin="0,25,0,0">
+
+        <Grid ColumnDefinitions="Auto, *,  Auto" Padding="30, 20,30,0" ColumnSpacing="20">
+            <ImageButton Grid.Column="0" Source="back.png" BackgroundColor="Transparent" WidthRequest="18" HeightRequest="18" 
+                         VerticalOptions="Center" Command="{Binding GoBackCommand}"/>
+            <Label Grid.Column="1" Text="{Binding SelectedProduct.ProductName}" FontSize="20" FontAttributes="Bold" TextColor="Black"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Grid Grid.Column="2" Padding="10, 0, 0, 0">
+                <Image Source="Cart2.png" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="42" HeightRequest="42"/>
+                <Grid BackgroundColor="{DynamicResource ThemeColor}" WidthRequest="24" HeightRequest="24" HorizontalOptions="End" VerticalOptions="Start" Margin="0, -5, -5, 0">
+                    <Grid.Clip>
+                        <EllipseGeometry Center="12, 12" RadiusX="7.5" RadiusY="7.5"/>
+                    </Grid.Clip>
+                    <Label Text="{Binding ItemsInCart}" FontSize="12" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCartPageCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1" Margin="15, 10" VerticalScrollBarVisibility="Never">
+            <StackLayout HorizontalOptions="StartAndExpand" Spacing="20" Margin="0" Padding="0">
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="LabelProductsName" Text="{Binding SelectedProduct.ProductName}" TextColor="Black" FontSize="21"  HeightRequest="27" HorizontalOptions="Start"/>
+                    <Image x:Name="imageButton" Source="heart.png"  WidthRequest="42" HeightRequest="42" HorizontalOptions="EndAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <Image Source="{Binding SelectedProduct.ImagePath}" Aspect="AspectFit" HeightRequest="350" WidthRequest="345"/>
+                <rating:RatingBar VerticalOptions="Start" HorizontalOptions="Start" ImageWidth="24" ImageHeight="24" FlowDirection="LeftToRight" EmptyStarImage="Star.png" FillStarImage="StarFull.png" SelectedStarValue="5" />
+
+                <Frame  Style="{StaticResource FrameShadow}" Margin="10" Padding="10, 15" 
+                        WidthRequest="325" CornerRadius="16" HasShadow="True" 
+                        VerticalOptions="Center" IsVisible="{Binding IsExists}">
+                    <StackLayout>
+                        <Label Text="{Binding SelectedProduct.Price, StringFormat='€{0:N2}'}" FontSize="16" TextColor="Black" FontAttributes="Bold"/>
+                        <Rectangle WidthRequest="315" HeightRequest="2" Fill="#E0E7ED" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+                        <Grid ColumnDefinitions="*, Auto" Margin="0,14.5" Padding="0" VerticalOptions="Center" ColumnSpacing="20">
+
+                            <StackLayout Grid.Column="0" Orientation="Horizontal" Margin="0" Padding="0" Spacing="10" VerticalOptions="Center">
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HeightRequest="24" WidthRequest="24" >
+                                    <Frame x:Name="FrameMinus" BackgroundColor="#E0E7ED" CornerRadius="12" WidthRequest="24" HeightRequest="24" Padding="0" Margin="0">
+                                        <Label Text="-"  TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16" />
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding DecreaseNumberOfItemsCommand}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+
+                                <Label x:Name="NumberLabelText" Text="{Binding NumberOfItemBuy}" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" />
+
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HeightRequest="24" WidthRequest="24" >
+                                    <Frame x:Name="FramePlus" BackgroundColor="#E0E7ED" CornerRadius="12" WidthRequest="24" HeightRequest="24" Padding="0" Margin="0">
+                                        <Label Text="+" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16" />
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding IncreaseNumberOfItemsCommand}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+
+                            </StackLayout>
+                            <Button Grid.Column="1" Text="{extensions:Translate AddToCart}" Style="{StaticResource BtnStyleFull}" WidthRequest="215" Command="{Binding AddToCartCommand}"/>
+                        </Grid>
+
+                        <Label Text="{extensions:Translate Stock}" TextColor="#219653" FontSize="14"/>
+                        
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{extensions:Translate DPF}" FontSize="12" TextColor="Black"/>
+                            <Label Text="{extensions:Translate DPF5}" FontSize="12" TextColor="Black"/>
+                            <Label Text="{extensions:Translate DPF10}" FontSize="12" TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Margin="0" Padding="10, 15" 
+                       BackgroundColor="White" BorderColor="#EEEEEE" 
+                       WidthRequest="345" CornerRadius="16" HasShadow="True" 
+                       VerticalOptions="Center" IsVisible="{Binding IsNotExists}" >
+                    <StackLayout>
+                        <Label Text="{Binding SelectedProduct.Price, StringFormat='€{0:N2}'}" FontSize="16" TextColor="Black" FontAttributes="Bold"/>
+                        <Frame Style="{StaticResource LabelFrameStyle}" HorizontalOptions="Center" WidthRequest="70" Margin="0,-20,0,0" HeightRequest="22" Padding="0" BackgroundColor="Gray" BorderColor="Gray">
+                            <Label Text="{extensions:Translate NotStock}" FontSize="12" TextColor="White" 
+                                   VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Frame>
+                        <Rectangle WidthRequest="315" HeightRequest="2" Fill="#E0E7ED" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+                        <Label Text="{extensions:Translate SaR}" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Text="{extensions:Translate CP}" FontSize="14" Opacity="0.9" TextColor="Black" 
+                                   VerticalOptions="Center"  />
+                            <Frame Grid.Column="1" Style="{StaticResource EntryFrame}" HeightRequest="40" HorizontalOptions="EndAndExpand" WidthRequest="215">
+                                <Entry Text="{Binding ContactPerson}" Placeholder="{extensions:Translate CP}"  TextColor="Black" 
+                                       PlaceholderColor="#6C808B" FontSize="14" />
+                            </Frame>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Text="{extensions:Translate Email}" FontSize="14" Opacity="0.9" TextColor="Black" 
+                                   VerticalOptions="Center" />
+                            <Frame Grid.Column="1" Style="{StaticResource EntryFrame}" HeightRequest="40" HorizontalOptions="EndAndExpand" WidthRequest="215">
+                                <Entry Text="{Binding Email}" Placeholder="{extensions:Translate Email}" TextColor="Black" 
+                                       PlaceholderColor="#6C808B" FontSize="14" />
+                            </Frame>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Text="{extensions:Translate Message}" FontSize="14" Opacity="0.9" TextColor="Black" 
+                                   VerticalOptions="Center" HorizontalOptions="Start" />
+                            <Frame Grid.Column="1" Style="{StaticResource EntryFrame}" HeightRequest="40" HorizontalOptions="EndAndExpand" WidthRequest="215">
+                                <Entry Text="{Binding Message}" Placeholder="{extensions:Translate Message}" TextColor="Black"  
+                                       PlaceholderColor="#6C808B" FontSize="14" />
+                            </Frame>
+                        </Grid>
+
+                        <Button Text="{extensions:Translate Send}" Style="{StaticResource BtnStyleFull}" Command="{Binding SendCommand}"/>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <StackLayout Padding="0" Margin="0" Spacing="5">
+                    <Label Text="{extensions:Translate Description}" TextColor="Black" FontSize="16" FontAttributes="Bold"/>
+                    <Label Text="{Binding SelectedProduct.ProductDescription}" TextColor="Black" FontSize="14"/> 
+                </StackLayout>
+               
+            </StackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
